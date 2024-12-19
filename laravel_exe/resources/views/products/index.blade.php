@@ -16,8 +16,10 @@
       <thead class="table-dark">
         <tr>
           <th class="text-white">Name</th>
+          <th class="text-white">Image</th>
           <th class="text-white">Description</th>
           <th class="text-white">Price</th>
+          <th class="text-white">Status</th>
           <th class="text-white text-center">Action</th>
         </tr>
       </thead>
@@ -25,8 +27,18 @@
         @foreach($products as $product)
         <tr>
           <th>{{$product['name']}}</th>
+          <th>
+            <img src="{{asset('productImages/'. $product->image)}}" alt="{{ $product->image}}" style="width:40px;">
+          </th>
           <th>{{$product['description']}}</th>
           <th>{{$product['price']}}</th>
+          <th>
+            @if($product['status'] == 1)
+            <span class="text-success">Active</span>
+            @else
+            <span class="text-danger">Suspended</span>
+            @endif
+          </th>
           <th class="d-flex justify-content-center">
             <a href="{{ route('products.edit', ['id' => $product['id']]) }}"
               class="btn btn-outline-secondary me-2">Edit</a>

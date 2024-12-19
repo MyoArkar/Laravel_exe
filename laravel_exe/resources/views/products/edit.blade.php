@@ -17,11 +17,16 @@
         Update Product
       </div>
       <div class="card-body">
-        <form action="{{ route('products.update',$product->id)}}" method="POST" class="d-flex flex-column row-gap-3">
+        <form action="{{ route('products.updated',$product->id)}}" method="POST" class="d-flex flex-column row-gap-3" enctype="multipart/form-data">
           @csrf
           <input type="text" value="{{$product['name']}}" name="name" class="form-control" />
+          <input type="file" class="form-control" name="image">
           <input type="text" value="{{$product['description']}}" name="desc" class="form-control" />
           <input type="number" value="{{$product['price']}}" name="price" class="form-control" />
+          <div class="form-check form-switch">
+            <label for="status" class="form-check-label">Active or Inactive</label>
+            <input type="checkbox" class="form-check-input" name="status"   {{$product->status == 1 ? "checked" : ""}}  />
+          </div>
           <button type="submit" class="btn btn-primary">Update</button>
         </form>
       </div>
