@@ -28,6 +28,7 @@
             <input type="checkbox" class="form-check-input" name="status"   {{$product->status == 1 ? "checked" : ""}}  />
           </div>
           <button type="submit" class="btn btn-primary">Update</button>
+          {{dd("yo")}}
         </form>
       </div>
     </div>

@@ -6,12 +6,20 @@ use App\Http\Requests\CategoryEditRequest;
 use App\Http\Requests\CategoryRequest;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Repositories\Category\CategoryRepositoryInterface;
 
 class CategoryController extends Controller
-{
+{   
+    protected $categoryRepository;
+
+    public function __construct(CategoryRepositoryInterface $categoryRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
+    }
+
     public function index()
     {
-        $categories = Category::all();
+        $categories = $this->categoryRepository->index();
 
         return view('categories.index', compact('categories'));
     }
