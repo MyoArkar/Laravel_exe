@@ -14,7 +14,7 @@ class ProductController extends Controller
         $products = Product::all();
         return view('products.index', compact('products'));
     }
-   
+
 
     public function create()
     {
@@ -22,7 +22,7 @@ class ProductController extends Controller
     }
     public function store(ProductRequest $request)
     {
-        
+
         $data = $request->validated();
         if ($request->hasFile('image')) {
             $imageName = time() . '.' . $request->image->extension();
@@ -42,22 +42,45 @@ class ProductController extends Controller
         return view('products.edit', compact('product'));
     }
 
-    public function update(ProductEditRequest $request)
-    {   
-       dd($request);
-        $data = $request->validated();
-        
-        if($request->hasFile('image')){
-            $imageName = time(). '.' . $request->image->extension();
-            $request->image->move(public_path('productImages'),$imageName);
+    //    public function update(ProductEditRequest $request)
+    //    {   
+    //       
+    //        $data = $request->validated();
+    //        
+    //        if($request->hasFile('image')){
+    //            $imageName = time(). '.' . $request->image->extension();
+    //            $request->image->move(public_path('productImages'),$imageName);
+    //
+    //            $data = array_merge($data,['image' => $imageName]);
+    //        }
+    //        $data['status'] = $request->has('status') ? true : false;
+    //        $category = Product::find($request->id);
+    //
+    //        $category->update($data);
+    //
+    //        return redirect()->route('products.index');
+    //    }
 
-            $data = array_merge($data,['image' => $imageName]);
+    public function update(Request $request)
+    { 
+        $data = $request->validate(
+            [
+                'name' => 'required|string',
+                'image' => 'nullable|image',
+                'description' => 'required|string',
+                'price' => 'required|integer',
+                'status' => 'nullable',
+            ]
+        );
+        if ($request->hasFile('image')) {
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('productImages'), $imageName);
+
+            $data = array_merge($data, ['image' => $imageName]);
         }
         $data['status'] = $request->has('status') ? true : false;
         $category = Product::find($request->id);
-
         $category->update($data);
-
         return redirect()->route('products.index');
     }
 
