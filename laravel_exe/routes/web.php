@@ -3,9 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ProductController;
-use App\Models\Product;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +13,7 @@ use App\Models\Product;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 //Categories
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 
@@ -27,15 +25,17 @@ Route::post('/categories/{id}/update', [CategoryController::class, 'update'])->n
 
 Route::post('/categories/{id}', [CategoryController::class, 'delete'])->name('categories.delete');
 
-//Products
-Route::get('/article', [ArticleController::class, 'index']);
+//Article
+Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
 
-Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
+Route::post('/articles/store', [ArticleController::class, 'store'])->name('articles.store');
 
-Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
-Route::post('/products/store', [ProductController::class, 'store'])->name('products.store');
+Route::get('/articles/{id}', [ArticleController::class, 'edit'])->name('articles.edit');
+Route::post('/articles/{id}/update', [ArticleController::class, 'update'])->name('articles.update');
 
-Route::get('/products/{id}', [ProductController::class, 'edit'])->name('products.edit');
-Route::post('/products/{id}/update', [ProductController::class, 'update'])->name('products.updated');
+Route::post('/articles/{id}', [ArticleController::class, 'delete'])->name('articles.delete');
 
-Route::post('/products/{id}', [ProductController::class, 'delete'])->name('products.delete');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
