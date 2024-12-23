@@ -13,7 +13,7 @@ class ArticleController extends Controller
     protected $articleRepository;
 
     public function __construct(ArticleRepositoryInterface $articleRepository)
-    {
+    {   $this->middleware('auth');
         $this->articleRepository = $articleRepository;
     }
     public function index()

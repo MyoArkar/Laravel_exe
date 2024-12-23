@@ -13,7 +13,9 @@ use App\Http\Controllers\CategoryController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+Route::get('/', function () {
+    return view('welcome');
+});
 //Categories
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 
@@ -36,6 +38,6 @@ Route::post('/articles/{id}/update', [ArticleController::class, 'update'])->name
 
 Route::post('/articles/{id}', [ArticleController::class, 'delete'])->name('articles.delete');
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

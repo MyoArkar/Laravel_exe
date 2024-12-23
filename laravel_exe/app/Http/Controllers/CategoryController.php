@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use App\Http\Requests\CategoryEditRequest;
 use App\Http\Requests\CategoryRequest;
@@ -14,7 +15,7 @@ class CategoryController extends Controller
     protected $categoryRepository;
 
     public function __construct(CategoryRepositoryInterface $categoryRepository)
-    {
+    {   $this->middleware('auth');
         $this->categoryRepository = $categoryRepository;
     }
 
