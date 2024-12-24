@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Article</title>
+    <title>User</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
@@ -23,28 +23,16 @@
         @endif
         <div class="card mt-4">
             <div class="card-header">
-                Create Article
+                Create User
             </div>
-            <form action="{{ route('articles.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="card-body d-flex flex-column gap-4">
-                    <input type="text" placeholder="Enter Article Name" name="name" class="form-control card-body" />
-                    <input type="text" placeholder="Enter  Description" name="description" class="form-control card-body" />
-                    <input type="file" class="form-control" name="image">
-                    <select name="category_id" id="">
-                        <option value="">Select Category</option>
-                        @foreach($categories as $category)
-                        <option value="{{$category->id}}">
-                            {{$category->name}}
-                        </option>
-                        @endforeach
-                    </select>
-                    <div class="card-body">
-                        <div class="form-check form-switch">
-                            <label for="status" class="form-check-label">Active or Inactive</label>
-                            <input type="checkbox" class="form-check-input" name="status" checked />
-                        </div>
-                    </div>
+                    <input type="text" placeholder="Enter User Name" name="name" class="form-control card-body" />
+                    <input type="text" placeholder="Enter  Email" name="email" class="form-control card-body" />
+                    <input type="password" placeholder="Enter  Password" name="password" class="form-control card-body" />
+                    <input type="password" placeholder="Confrim  Password" name="password_confirmation" class="form-control card-body" />
+                    
 
                 </div>
                 <div class="card-footer">

@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\UserController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,7 +29,7 @@ Route::post('/categories/{id}/update', [CategoryController::class, 'update'])->n
 
 Route::post('/categories/{id}', [CategoryController::class, 'delete'])->name('categories.delete');
 
-//Article
+//Articles
 Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
 
 Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
@@ -37,6 +39,17 @@ Route::get('/articles/{id}', [ArticleController::class, 'edit'])->name('articles
 Route::post('/articles/{id}/update', [ArticleController::class, 'update'])->name('articles.update');
 
 Route::post('/articles/{id}', [ArticleController::class, 'delete'])->name('articles.delete');
+
+//Users
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
+
+Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+Route::post('/users/store', [UserController::class, 'store'])->name('users.store');
+
+Route::get('/users/{id}', [UserController::class, 'edit'])->name('users.edit');
+Route::post('/users/{id}/update', [UserController::class, 'update'])->name('users.update');
+
+Route::post('/users/{id}', [UserController::class, 'delete'])->name('users.delete');
 
 Auth::routes(['register' => false]);
 

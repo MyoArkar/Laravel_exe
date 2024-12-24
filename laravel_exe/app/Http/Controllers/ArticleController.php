@@ -7,28 +7,31 @@ use Illuminate\Support\Facades\File;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use App\Repositories\Article\ArticleRepositoryInterface;
+use App\Repositories\Category\CategoryRepositoryInterface;
 
 class ArticleController extends Controller
 {   
     protected $articleRepository;
+    protected $categoryRepository;
 
-    public function __construct(ArticleRepositoryInterface $articleRepository)
+    public function __construct(ArticleRepositoryInterface $articleRepository,CategoryRepositoryInterface $categoryRepository)
     {   $this->middleware('auth');
         $this->articleRepository = $articleRepository;
+        $this->categoryRepository = $categoryRepository;
     }
     public function index()
     {
 
         $articles = $this->articleRepository->index();
-
         return view('articles.index', compact('articles'));
     }
     public function create()
-    {
-        return view('articles.create');
+    {   
+        $categories = $this->categoryRepository->index();
+        return view('articles.create', compact('categories'));
     }
     public function store(ArticleRequest $request)
-    {
+    {   
         $data = $request->validated();
         
         if($request->hasFile('image')){
@@ -44,10 +47,11 @@ class ArticleController extends Controller
         return redirect()->route('articles.index');
     }
     public function edit($id)
-    {
+    {   
+        $categories = $this->categoryRepository->index();
         $article = $this->articleRepository->show($id);
 
-        return view('articles.edit', compact('article'));
+        return view('articles.edit', compact('article','categories'));
     }
     public function update(ArticleRequest $request)
     {
