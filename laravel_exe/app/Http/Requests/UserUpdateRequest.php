@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class ArticleRequest extends FormRequest
+class UserUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,12 +22,16 @@ class ArticleRequest extends FormRequest
      */
     public function rules(): array
     {
+        $id = $this->route('id');
         return [
-            'category_id' => 'required',
-            'name' => 'required|string',
-            'description' => 'required|string',
-            'image' => 'nullable|image',
-            'status' => 'nullable'
+            'name' => 'required|string|max:255',
+            'email' => [
+                'required',
+                'email',
+                'max:255',
+                Rule::unique('users')->ignore($id),
+            ],
+            'password' => 'nullable|string|min:8|confirmed', // Password is optional
 
         ];
     }

@@ -9,7 +9,7 @@ class ArticleRepository implements  ArticleRepositoryInterface
 {
     public function index()
     {
-        $articles =  Article::all();
+        $articles =  Article::with('category')->get();
 
         return $articles;
     }
