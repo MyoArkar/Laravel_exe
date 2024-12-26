@@ -31,8 +31,10 @@ class UserUpdateRequest extends FormRequest
                 'max:255',
                 Rule::unique('users')->ignore($id),
             ],
+            'image' => 'nullable|image',
             'password' => 'nullable|string|min:8|confirmed', // Password is optional
-
+            'address' => 'nullable|string|max:255',
+            'phone' => 'nullable|string|max:255',
         ];
     }
 }

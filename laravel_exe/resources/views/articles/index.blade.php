@@ -1,17 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Article List</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-</head>
-
-<body>
-    <div class="container">
+@extends('layouts.master')
+@section('content')
+<div class="app-main__outer">
+    <div class="app-main__inner">
         <h1>Article List</h1>
         <a href="{{ route('articles.create') }}" class="btn btn-outline-success mb-4">
             + Create
@@ -19,7 +9,7 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    
+
                     <th class="bg-primary text-white">NAME</th>
                     <th class="bg-primary text-white">Description</th>
                     <th class="bg-primary text-white">Image</th>
@@ -31,7 +21,7 @@
             <tbody>
                 @foreach ($articles as $data)
                 <tr>
-                    
+
                     <th>{{ $data['name'] }}</th>
                     <th>{{ $data['description'] }}</th>
                     <th>
@@ -62,9 +52,5 @@
             </tbody>
         </table>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
-    </script>
-</body>
-
-</html>
+</div>
+@endsection

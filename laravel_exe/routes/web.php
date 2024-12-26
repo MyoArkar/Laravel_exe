@@ -18,6 +18,9 @@ use App\Http\Controllers\UserController;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/dashboard', function(){
+    return view('index');
+})->name('dashboad');
 //Categories
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 

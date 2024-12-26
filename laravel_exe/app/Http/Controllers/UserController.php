@@ -6,6 +6,7 @@ use App\Http\Requests\UserRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Repositories\User\UserRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -31,8 +32,15 @@ class UserController extends Controller
     }
     public function store(UserRequest $request)
     {   
+        //dd($request);
         $data = $request->validated();
-        
+       
+        if($request->hasFile('image')){
+            $imageName = time(). '.' . $request->image->extension();
+            $request->image->move(public_path('userImages'),$imageName);
+
+            $data = array_merge($data,['image' => $imageName]);
+        }
         $data['password'] = Hash::make($data['password']);
         $this->userRepository->store($data);
 
@@ -52,6 +60,18 @@ class UserController extends Controller
             $data['password'] = Hash::make($request['password']);
         }else{
             unset($data['password']);
+        }
+        
+        if($request->old_image && !($request->hasFile('image'))){
+            $data = array_merge($data,['image' => $request->old_image]);
+        }else{
+            if($request->hasFile('image')){
+                File::delete(public_path('userImages/' .$request->old_image));
+                $imageName = time(). '.' . $request->image->extension();
+                $request->image->move(public_path('userImages'),$imageName);
+
+                $data = array_merge($data,['image' => $imageName]);
+            }
         }
         $user = $this->userRepository->show($request->id);
         $user->update($data);
