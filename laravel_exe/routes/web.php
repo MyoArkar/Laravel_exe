@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -54,6 +56,29 @@ Route::post('/users/{id}/update', [UserController::class, 'update'])->name('user
 
 Route::post('/users/{id}', [UserController::class, 'delete'])->name('users.delete');
 
+//Permissions
+Route::get('/permissions', [PermissionController::class, 'index'])->name('permissions.index');
+
+Route::get('/permissions/create', [PermissionController::class, 'create'])->name('permissions.create');
+Route::post('/permissions/store', [PermissionController::class, 'store'])->name('permissions.store');
+
+Route::get('/permissions/{id}', [PermissionController::class, 'edit'])->name('permissions.edit');
+Route::post('/permissions/{id}/update', [PermissionController::class, 'update'])->name('permissions.update');
+
+Route::post('/permissions/{id}', [PermissionController::class, 'delete'])->name('permissions.delete');
+
+//Roles
+Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
+
+Route::get('/roles/create', [RoleController::class, 'create'])->name('roles.create');
+Route::post('/roles/store', [RoleController::class, 'store'])->name('roles.store');
+
+Route::get('/roles/{id}', [RoleController::class, 'edit'])->name('roles.edit');
+Route::post('/roles/{id}/update', [RoleController::class, 'update'])->name('roles.update');
+
+Route::post('/roles/{id}', [RoleController::class, 'delete'])->name('roles.delete');
+
+//
 Auth::routes(['register' => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

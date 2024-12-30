@@ -3,9 +3,11 @@
 <div class="app-main__outer">
     <div class="app-main__inner">
         <h1>Article List</h1>
+        @can('articleCreate')
         <a href="{{ route('articles.create') }}" class="btn btn-outline-success mb-4">
             + Create
         </a>
+        @endcan
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -15,7 +17,9 @@
                     <th class="bg-primary text-white">Image</th>
                     <th class="bg-primary text-white">Category</th>
                     <th class="bg-primary text-white">Status</th>
+                    @can('articleEdit,articleDelete')
                     <th class="bg-primary text-white">ACTION</th>
+                    @endcan
                 </tr>
             </thead>
             <tbody>
@@ -37,6 +41,7 @@
                         <span class="text-danger">Suspended</span>
                         @endif
                     </th>
+                    @can('articleEdit,articleDelete')
                     <th class="d-flex">
                         <a href="{{ route('articles.edit', ['id' => $data['id']]) }}"
                             class="btn btn-outline-secondary me-2">
@@ -47,6 +52,7 @@
                             <button class="btn btn-outline-danger">Delete</button>
                         </form>
                     </th>
+                    @endcan
                 </tr>
                 @endforeach
             </tbody>
