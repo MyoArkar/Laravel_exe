@@ -3,9 +3,11 @@
 <div class="app-main__outer">
     <div class="app-main__inner">
         <h1>Category List</h1>
+        @can('categoryCreate')
         <a href="{{ route('categories.create') }}" class="btn btn-outline-success mb-4">
             + Create
         </a>
+        @endcan
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -13,7 +15,9 @@
                     <th class="bg-primary text-white">NAME</th>
                     <th class="bg-primary text-white">Image</th>
                     <th class="bg-primary text-white">Status</th>
+                    @can('$categoryEdit,$categoryDelete')
                     <th class="bg-primary text-white">ACTION</th>
+                    @endcan
                 </tr>
             </thead>
             <tbody>
@@ -31,6 +35,7 @@
                         <span class="text-danger">Suspended</span>
                         @endif
                     </th>
+                    @can('$categoryEdit,$categoryDelete')
                     <th class="d-flex">
                         <a href="{{ route('categories.edit', ['id' => $data['id']]) }}"
                             class="btn btn-outline-secondary me-2">
@@ -41,6 +46,7 @@
                             <button class="btn btn-outline-danger">Delete</button>
                         </form>
                     </th>
+                    @endcan
                 </tr>
                 @endforeach
             </tbody>
