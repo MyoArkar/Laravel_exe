@@ -28,6 +28,7 @@ class UserRequest extends FormRequest
             'password' => 'required|string|min:8|confirmed',
             'address' => 'required|string|max:255',
             'phone' => 'required|string|max:255',
+            'status' => 'nullable'
         ];
     }
 }

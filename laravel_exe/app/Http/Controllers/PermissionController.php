@@ -40,7 +40,7 @@ class PermissionController extends Controller
 
     public function edit($id)
     {
-        $permission = $this->permissionRepository->show($id);
+        $permission =$this->permissionRepository->show($id);
 
         return view('permissions.edit', compact('permission'));
     }

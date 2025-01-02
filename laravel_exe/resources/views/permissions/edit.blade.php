@@ -11,6 +11,11 @@
                 <div class="card-body d-flex flex-column gap-4">
                     <input type="text" value="{{ $permission->name }}" name="name" class="form-control card-body" />
                 </div>
+                <div class="card-body d-flex flex-column gap-4">
+                    @foreach($permission->roles as $role)
+                    <li>{{$role->name}}</li>
+                    @endforeach
+                </div>
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Update</button>
                     <a href="{{ route('permissions.index') }}" class="btn btn-secondary">Back</a>

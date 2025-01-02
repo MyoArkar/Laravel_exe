@@ -21,7 +21,7 @@ class UserRepository implements  UserRepositoryInterface
 
     public function show($id)
     {
-        return  User::find($id);
+        return  User::with('roles')->find($id);
     }
 
     
