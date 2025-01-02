@@ -10,9 +10,9 @@ class PermissionRepository implements  PermissionRepositoryInterface
 {
     public function index()
     {
-        $users =  Permission::all();
+        $permissions =  Permission::all();
 
-        return $users;
+        return $permissions;
     }
 
     public function store($data)
@@ -22,7 +22,7 @@ class PermissionRepository implements  PermissionRepositoryInterface
 
     public function show($id)
     {
-        return  Permission::find($id);
+        return Permission::with('roles')->find($id);
     }
 
     

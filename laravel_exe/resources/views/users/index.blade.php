@@ -17,9 +17,10 @@
                     <th class="bg-primary text-white">Email</th>
                     <th class="bg-primary text-white">Address</th>
                     <th class="bg-primary text-white">Phone</th>
-                    @can('userEdit,userDelete')
+                    <th class="bg-primary text-white">Role</th>
+                    <th class="bg-primary text-white">Status</th>
                     <th class="bg-primary text-white">Actions</th>
-                    @endcan
+
                 </tr>
             </thead>
             <tbody>
@@ -33,7 +34,18 @@
                     <th>{{ $data['email'] }}</th>
                     <th>{{ $data['address'] }}</th>
                     <th>{{ $data['phone'] }}</th>
-                    @can('userEdit,userDelete')
+                    <th>
+                        @foreach($data->roles as $role)
+                        <span class="badge bg-primary">{{ $role->name }}</span>
+                        @endforeach
+                    </th>
+                    <th>
+                        @if($data['status'] == 1)
+                        <span class="text-success">Active</span>
+                        @else
+                        <span class="text-danger">Suspended</span>
+                        @endif
+                    </th>
                     <th class="d-flex">
                         <a href="{{ route('users.edit', ['id' => $data['id']]) }}"
                             class="btn btn-outline-secondary me-2">
@@ -44,7 +56,7 @@
                             <button class="btn btn-outline-danger">Delete</button>
                         </form>
                     </th>
-                    @endcan
+
                 </tr>
                 @endforeach
             </tbody>

@@ -35,6 +35,7 @@ class UserUpdateRequest extends FormRequest
             'password' => 'nullable|string|min:8|confirmed', // Password is optional
             'address' => 'nullable|string|max:255',
             'phone' => 'nullable|string|max:255',
+            'status' => 'nullable'
         ];
     }
 }

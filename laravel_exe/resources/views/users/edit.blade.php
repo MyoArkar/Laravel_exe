@@ -26,6 +26,18 @@
                     <input type="password" placeholder="Confrim  Password" name="password_confirmation" class="form-control card-body" />
                     <input type="text" value="{{ $user->address }}" name="address" class="form-control card-body" />
                     <input type="text" value="{{ $user->phone }}" name="phone" class="form-control card-body" />
+                    <select name="roles[]" id="">
+                        @foreach($roles as $role)
+                        <option value="{{$role->id}}" {{$user->roles->contains($role->id) ? "selected" : ""}}>{{$role->name}}</option>
+                        @endforeach
+                    </select>
+                    <div class="card-body">
+                        <div class="form-check form-switch">
+                            <label for="status" class="form-check-label">Active or Inactive</label>
+                            <input type="checkbox" class="form-check-input" name="status" {{$user->status == 1 ? "checked" : ""}} />
+
+                        </div>
+                    </div>
                 </div>
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Update</button>

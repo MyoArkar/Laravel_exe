@@ -26,7 +26,15 @@
                     <input type="text" placeholder="Enter  Address" name="address" class="form-control card-body" />
                     <input type="text" placeholder="Enter  Phone" name="phone" class="form-control card-body" />
 
-
+                    <select name="roles[]" id="">
+                        @foreach($roles as $role)
+                        <option value="{{$role->id}}">{{$role->name}}</option>
+                        @endforeach
+                    </select>
+                    <div class="form-check form-switch">
+                        <label for="status" class="form-check-label">Active or Inactive</label>
+                        <input type="checkbox" class="form-check-input" name="status" checked />
+                    </div>
                 </div>
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary">
