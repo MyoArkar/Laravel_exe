@@ -10,7 +10,14 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 
 class ArticleController extends BaseController
-{
+{   
+    public function __construct()
+    {
+        $this->middleware('permission:articleList', ['only' => ['index']]);
+        $this->middleware('permission:articleCreate', ['only' => ['store']]);
+        $this->middleware('permission:articleEdit', ['only' => ['update']]);
+        $this->middleware('permission:articleDelete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      */

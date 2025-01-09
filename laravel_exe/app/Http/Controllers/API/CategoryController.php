@@ -10,9 +10,14 @@ use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends BaseController
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct()
+    {
+        $this->middleware('permission:categoryList', ['only' => ['index']]);
+        $this->middleware('permission:categoryCreate', ['only' => ['store']]);
+        $this->middleware('permission:categoryEdit', ['only' => ['update']]);
+        $this->middleware('permission:categoryDelete', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         $categories = Category::get();
