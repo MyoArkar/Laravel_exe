@@ -3,8 +3,9 @@
 use App\Http\Controllers\API\ArticleController;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CategoryController;
-use App\Models\Category;
-use Illuminate\Http\Request;
+use App\Http\Controllers\API\PermissionController;
+use App\Http\Controllers\API\RoleController;
+use App\Http\Controllers\API\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,4 +25,7 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::post('/auth/register', [AuthController::class, 'register']);
     Route::apiResource('/categories', CategoryController::class);
     Route::apiResource('/articles', ArticleController::class);
+    Route::apiResource('/users', UserController::class);
+    Route::apiResource('/roles', RoleController::class);
+    Route::apiResource('/permissions', PermissionController::class);
 });
